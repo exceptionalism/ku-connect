@@ -1,0 +1,16 @@
+{
+  "name": "api",
+  "version": "0.0.1",
+  "main": "api.js",
+  "license": "MIT",
+  "dependencies": {
+    "config": "^3.2.4",
+    "express": "^4.17.1",
+    "md5": "^2.2.1",
+    "mongoose": "^5.7.11"
+  },
+  "scripts": {
+    "start": "node api",
+    "dev": "nodemon api"
+  }
+}
