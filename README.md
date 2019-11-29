@@ -29,4 +29,4 @@ MongoDB connected.
 The server is now live at [http://localhost:3000](http://localhost:3000)
 
 ## License
-Unlicensed
+[MIT](https://choosealicense.com/licenses/mit/)
