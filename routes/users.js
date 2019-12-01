@@ -1,8 +1,8 @@
 const express =  require("express")
-const router = express.Router()
 const md5 = require('md5')
 const User = require('../models/User')
 
+const router = express.Router()
 
 const hash = code => md5(code);
 const generateToken = pass => md5(md5(pass));
@@ -102,7 +102,6 @@ router.post('/signin', async (req, res) => {
                     })
                 }
             }
-
         } catch (err) {
             console.error(err.message)
             res.status(500).send(`Error. ${err.message}`)
@@ -111,4 +110,38 @@ router.post('/signin', async (req, res) => {
         res.status(400).send("Error. Required data empty.")
     }
 })
+
+
+router.post('/signout', async (req, res) => {
+    const { token } = req.body
+
+    let user = await User.findOne({ token })
+
+    if (user) {
+        if (user.token.expiration >= Date.now()) {
+            user.token = {
+                expiration: 0,
+                ticket: ""
+            }
+            user = new User(
+                user
+            )
+            await user.save();
+            res.status(200).json({
+                success: "signed out"
+            })
+        } else {
+            req.status(409).json({
+                error: "session has already expired"
+            })
+        }
+    } else {
+        res.status(404).json({
+            error: "session not found"
+        })
+    }
+})
+
+
+
 module.exports = router
