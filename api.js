@@ -11,6 +11,7 @@ app.use(express.json({extended: false}))
 
 app.use('/', require('./routes/index'))
 app.use('/api/user', require('./routes/users'))
+app.use('/api/data', require('./routes/data'))
 
 app.get('/', (req, res)=> res.send("Thank you for accessing this API."))
 
