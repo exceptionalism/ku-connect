@@ -1,1 +1,1 @@
-web: PORT = $PORT node api
+web: process.env.PORT = $PORT node api
