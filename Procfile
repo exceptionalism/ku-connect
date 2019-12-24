@@ -1,1 +1,1 @@
-web: node api
+web: PORT = $PORT node api

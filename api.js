@@ -15,7 +15,7 @@ app.use('/api/data', require('./routes/data'))
 
 app.get('/', (req, res)=> res.send("Thank you for accessing this API."))
 
-app.listen(config.get('PORT'), () => console.log("Server running at ", config.get('PORT')))
+app.listen(process.env.PORT ? process.env.PORT : config.get('PORT'), () => console.log("Server running at ", config.get('PORT')))
 
 app.get('/api/', (req, res) => {
     res.send("Yayyy")
