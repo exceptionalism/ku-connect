@@ -26,7 +26,7 @@ router.post('/getData', async (req, res) => {
                 //     facSem
                 // })
                 // await routine.save()
-                let routineAll = await Routine.find({ sCode: "EEEG211" })
+                let routineAll = await Routine.find({})
                 res.status(200).json({ routineAll })
             } else {
                 res.status(501).json({

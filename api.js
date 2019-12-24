@@ -4,7 +4,7 @@ const config = require('config')
 
 const app = express()
 
-connectDB()
+// connectDB()
 
 app.use(express.json({extended: false}))
 
