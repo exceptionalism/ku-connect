@@ -33,7 +33,8 @@ router.post('/create', async (req, res) => {
                     })
                 } else {
                     let joinYear = 20 + code.substr(6, 2)
-                    let currentYear = (new Date()).getFullYear() - joinYear + 1
+                    let d = new Date()
+                    let currentYear = d.getFullYear() - joinYear + (d.getMonth() <= 6 ? 0 : 1)
                     let faculty = code.substr(4, 2)
                     let pass = 0000
                     let check = false

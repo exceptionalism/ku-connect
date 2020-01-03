@@ -10,4 +10,4 @@ const urlSchema = new mongoose.Schema({
     facSem: String
 })
  
-module.exports = mongoose.model('routine', urlSchema)
+module.exports = mongoose.model('routines', urlSchema)

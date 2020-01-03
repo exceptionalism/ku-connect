@@ -23,11 +23,15 @@ router.post('/getData', async (req, res) => {
                 //     sCode: "EEEG211",
                 //     lecturer: "Santosh Parajuli",
                 //     classroom: "9 404",
-                //     facSem
+                //     facSem: "cs2"
                 // })
                 // await routine.save()
-                let routineAll = await Routine.find({})
-                res.status(200).json({ routineAll })
+                let routineAll = Routine.find()
+                routineAll.exec((err, docs) => {
+                    if (err) throw err;
+                    // console.log(docs)
+                    res.status(200).json( docs )
+                })
             } else {
                 res.status(501).json({
                     error: "session has already expired"
