@@ -4,7 +4,7 @@ const config = require('config')
 
 const app = express()
 
-const port = process.env.NODE_ENV == 'production' ? process.env.PORT : config.get('PORT')
+const port = process.env.PORT ? process.env.PORT : config.get('PORT')
 
 connectDB()
 
