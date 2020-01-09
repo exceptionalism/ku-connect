@@ -4,7 +4,7 @@ const config = require('config')
 
 const app = express()
 
-const port = process.env.PORT ? process.env.PORT : config.get('PORT')
+const port = process.env.NODE_ENV == 'production' ? process.env.PORT : config.get('PORT')
 
 connectDB()
 
@@ -17,7 +17,7 @@ app.use('/api/data', require('./routes/data'))
 
 app.get('/', (req, res)=> res.send("Thank you for accessing this API."))
 
-app.listen(port, () => console.log("Server running at ", port))
+app.listen(port, () => console.log("Server running at ", `http://localhost:${port}`))
 
 app.get('/api/', (req, res) => {
     res.send("Yayyy")
