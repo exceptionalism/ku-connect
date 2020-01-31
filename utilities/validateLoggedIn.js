@@ -10,7 +10,9 @@ module.exports = checkLoggedIn = async (req, res, next) => {
         let user = await User.findOne({ token })
         if (!user)
             res.json({"token": "Token does not exist."})
-        else
+        else {
             res.locals.user = user
+            next()
+        }
     }
 }
