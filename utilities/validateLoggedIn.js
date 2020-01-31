@@ -12,7 +12,7 @@ module.exports = checkLoggedIn = async (req, res, next) => {
             res.json({"token": "Token does not exist."})
         else {
             res.locals.user = user
-            next()
+            next();
         }
     }
 }
