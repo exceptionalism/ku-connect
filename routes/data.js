@@ -5,7 +5,7 @@ const Routine = require('../models/Routine')
 
 const router = express.Router()
 
-router.post('/getData', async (req, res) => {
+router.post('/get', async (req, res) => {
     const { token } = req.body
 
     if (token) {

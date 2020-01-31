@@ -1,6 +1,7 @@
 const express =  require("express")
 const md5 = require('md5')
 const User = require('../models/User')
+const mailer = require('../utilities/mail')
 
 const router = express.Router()
 
@@ -16,57 +17,60 @@ const getNewToken = (code, pass) => {
 
 
 router.post('/create', async (req, res) => {
-    const { name, code } = req.body
+    const { name, code, email } = req.body
+    if (name.length > 0 && code.length > 0 && email.length > 0) {
+        try {
+            let user = await User.findOne({ code })
+            if (!user) {
+                let joinYear = 20 + code.substr(6, 2)
 
-    if (name && code) {
-        console.log("username: ", name)
-        console.log("code: ", code)
+                let d = new Date()
+                let currentYear = d.getFullYear() - joinYear + (d.getMonth() <= 6 ? 0 : 1)
 
-        if (name.length > 0 && code.length > 0) {
-            try {
-                console.log("Checking user")
-                let user = await User.findOne({ code })
+                let faculty = code.substr(4, 2)
 
-                if (user) {
-                    res.status(409).json({
-                        "Error": "Code already registered."
-                    })
-                } else {
-                    let joinYear = 20 + code.substr(6, 2)
-                    let d = new Date()
-                    let currentYear = d.getFullYear() - joinYear + (d.getMonth() <= 6 ? 0 : 1)
-                    let faculty = code.substr(4, 2)
-                    let pass = 0000
-                    let check = false
-                    while (!check) {
-                        pass = generatePin()
-                        console.log("Checking pass")
-                        let flag = await User.findOne({ pass })
-                        check = flag ? false : true;
-                    }
-                    console.log("Pass creation succedded")
-                    let password = hash(pass)
-                    let token = getNewToken(code, pass)
-                    console.log("password: ", password)
-                    user = new User({
-                        name,
-                        code,
-                        faculty,
-                        joinYear,
-                        currentYear,
-                        token,
-                        password
-                    })
-                    await user.save()
-                    console.log("User created.")
-                    res.status(201).json({user, pass})
+                let pass = 0000
+                let check = false
+                while (!check) {
+                    pass = generatePin()
+                    console.log("Checking pass")
+                    let flag = await User.findOne({ pass })
+                    check = flag ? false : true;
                 }
-            } catch (err) {
-                console.error(err.message)
-                res.status(500).send(`Error. ${err.message}`)
+                
+                let password = hash(pass)
+                
+                let token = getNewToken(code, pass)
+                
+                let emailPin = generatePin()+generatePin() || 00000
+
+                user = new User({
+                    name,
+                    email,
+                    code,
+                    faculty,
+                    joinYear,
+                    currentYear,
+                    token,
+                    password,
+                    emailPin,
+                    emailConfirmed: false
+                })
+                await user.save()
+
+                mailer.send({email, name, emailPin}, (error, info) => {
+                    console.log(error, info)
+                })
+
+                res.status(201).json({user, pass})
+            } else {
+                res.status(409).json({
+                    "Error": "Code already registered."
+                })
             }
-        } else {
-            res.status(400).send("Error. Required data empty.")
+        } catch (err) {
+            console.error(err.message)
+            res.status(500).send(`Error. ${err.message}`)
         }
     } else {
         res.status(400).send("Error. Required data empty.")
@@ -75,47 +79,38 @@ router.post('/create', async (req, res) => {
 
 router.post('/signin', async (req, res) => {
     const { code, pass } = req.body
-    
-    if (code && pass) {
-        console.log("code: ", code)
-        console.log("pass: ", pass)
+    if (code.length > 0 && pass.length > 0) {
+        try {
+            console.log("Checking user")
+            let user = await User.findOne({ code })
 
-
-        if (code.length > 0 && pass.length > 0) {
-            try {
-                console.log("Checking user")
-                let user = await User.findOne({ code })
-
-                if (!user) {
-                    res.status(409).json({
-                        "Error": "username not registered to the database."
+            if (!user) {
+                res.status(409).json({
+                    "Error": "username not registered to the database."
+                })
+            } else {
+                console.log("User's:", hash(parseInt(pass)))
+                console.log("Registered:", user.password)
+                if (user.password === hash(parseInt(pass))) {
+                    user.token = getNewToken(code, pass)
+                    token = user.token
+                    user = new User(
+                        user
+                    )
+                    await user.save();
+                    res.status(200).json({
+                        success: "Authorized",
+                        token
                     })
                 } else {
-                    console.log("User's:", hash(parseInt(pass)))
-                    console.log("Registered:", user.password)
-                    if (user.password === hash(parseInt(pass))) {
-                        user.token = getNewToken(code, pass)
-                        token = user.token
-                        user = new User(
-                            user
-                        )
-                        await user.save();
-                        res.status(200).json({
-                            success: "Authorized",
-                            token
-                        })
-                    } else {
-                        res.status(400).json({
-                            error: "Password did not match."
-                        })
-                    }
+                    res.status(400).json({
+                        error: "Password did not match."
+                    })
                 }
-            } catch (err) {
-                console.error(err.message)
-                res.status(500).send(`Error. ${err.message}`)
             }
-        } else {
-            res.status(400).send("Error. Required data empty.")
+        } catch (err) {
+            console.error(err.message)
+            res.status(500).send(`Error. ${err.message}`)
         }
     } else {
         res.status(400).send("Error. Required data empty.")

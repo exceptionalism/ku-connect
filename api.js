@@ -11,7 +11,7 @@ connectDB()
 app.use(express.json({extended: false}))
 
 
-// app.use('/', require('./routes/index'))
+app.use('/', require('./routes/index'))
 app.use('/api/user', require('./routes/users'))
 app.use('/api/data', require('./routes/data'))
 

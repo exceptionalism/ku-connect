@@ -11,7 +11,10 @@ const urlSchema = new mongoose.Schema({
         expiration: Number,
         ticket: String
     },
-    password: String
+    password: String,
+    email: String,
+    emailPin: Number,
+    emailConfirmed: Boolean
 })
 
 module.exports = mongoose.model('user', urlSchema)
