@@ -1,5 +1,4 @@
 const express =  require("express")
-const md5 = require('md5')
 const User = require('../models/User')
 const mailer = require('../utilities/mail')
 const checkForLogin = require('../utilities/validateLogin')
@@ -8,15 +7,7 @@ const checkLoggedIn = require('../utilities/validateLoggedIn')
 
 const router = express.Router()
 
-const hash = code => md5(code);
-const generateToken = pass => md5(md5(pass));
-const generatePin = () => Math.floor((Math.random() + 1)*1000);
-const getNewToken = (code, pass) => {
-    return {
-        "expiration": Date.now() + 1000 * 3600 * 24 * 30,
-        "ticket": generateToken(Date.now() + code + pass)
-    }
-}
+const { hash, generatePin, getNewToken } = require('../utilities/cryptoStuffs')
 
 
 router.post('/create', checkForRegister, async (req, res) => {

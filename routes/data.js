@@ -16,21 +16,11 @@ router.post('/get', async (req, res) => {
                 let facSem = ""
                 facSem = (user.faculty + user.currentYear).toString();
                 console.log("facSem: ", facSem)
-                // let routine = new Routine({
-                //     weekDay: 2,
-                //     time: 900,
-                //     subject: "Microelectronics",
-                //     sCode: "EEEG211",
-                //     lecturer: "Santosh Parajuli",
-                //     classroom: "9 404",
-                //     facSem: "cs2"
-                // })
-                // await routine.save()
                 let routineAll = Routine.find()
                 routineAll.exec((err, docs) => {
                     if (err) throw err;
                     // console.log(docs)
-                    res.status(200).json( docs )
+                    res.status(200).json({ docs })
                 })
             } else {
                 res.status(501).json({
