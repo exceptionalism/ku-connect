@@ -1,5 +1,6 @@
 const express =  require("express")
 const User = require('../models/User')
+const AppSettings = require('../models/Settings')
 const mailer = require('../utilities/mail')
 const checkForLogin = require('../utilities/validateLogin')
 const checkForRegister = require('../utilities/validateRegister')
@@ -7,7 +8,7 @@ const checkLoggedIn = require('../utilities/validateLoggedIn')
 
 const router = express.Router()
 
-const { hash, generatePin, getNewToken } = require('../utilities/cryptoStuffs')
+const { hash, generatePin, getNewToken, generateResetPin } = require('../utilities/cryptoStuffs')
 
 
 router.post('/create', checkForRegister, async (req, res) => {
@@ -171,5 +172,79 @@ router.patch('/email', checkLoggedIn, async (req, res) => {
         res.json({error: "Cannot update email because provided email already exists."})
     }
 })
+
+router.patch('/reset-password', checkLoggedIn, async (req, res) => {
+    let newPin = generateResetPin()
+    console.log(newPin)
+    let user = res.locals.user
+    mailer.resetPassword({
+        email: user.email,
+        name: user.name,
+        resetPin: newPin
+    }, (error, info) => {
+        console.log(error, info)
+    })
+    try {
+    let password = hash(newPin)
+    let doc = await User.findByIdAndUpdate(user, {password})
+    console.log("Updated: ", doc)
+    if (doc)
+        res.status(200).json({"Error": null})
+    else
+        res.status(501).json({"Error": "Error updating database."})
+    } catch (e) {
+        res.status(500).json({"Error": e.message})
+    }
+})
+router.patch('/sync-settings', checkLoggedIn, async (req, res) => {
+    const { notification = true, timer = 10 } = req.body
+    let user = res.locals.user
+    let doc = await AppSettings.findOne({user})
+    if (doc) {
+        try {
+            let updatedDoc = await AppSettings.findOneAndUpdate({user: user._id}, {notification, timer})
+            if (updatedDoc)
+                res.json({"Error": null})
+            else
+                res.json({"Error": "Error updating database."})
+        } catch (e) {
+            res.json({"Error": e.message})
+        }
+    } else {
+        let newDoc = new AppSettings({
+            user: user._id,
+            notification, timer
+        })
+        let savedDoc = await newDoc.save()
+        if (savedDoc)
+            res.json({"Error": null})
+        else
+            res.json({"Error": "Error updating database."})
+    }
+})
+router.post('/get-settings', checkLoggedIn, async (req, res) => {
+    let user = res.locals.user
+    try {
+        let settings = await AppSettings.findOne({ user })
+        if (settings)
+            res.json({
+                Error: null,
+                data: {
+                    notification: settings.notification,
+                    timer: settings.timer
+                }
+            })
+        else
+            res.json({
+                Error: "Remote setting data does not exist."
+            })
+    } catch (e) {
+        res.json({
+            Error: e.message
+        })
+        console.log(e.message)
+    }
+})
+
 
 module.exports = router

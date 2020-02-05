@@ -9,7 +9,10 @@ const getNewToken = (code, pass) => {
         "ticket": generateToken(Date.now() + code + pass)
     }
 }
+const generateResetPin = () => {
+    return parseInt((Math.floor((Math.random() + 1)*1000)*Date.now()).toString().substr((Math.random+1)*10, 4))
+}
 
 module.exports = {
-    hash, generateToken, generatePin, getNewToken
+    hash, generateToken, generatePin, getNewToken, generateResetPin
 }
