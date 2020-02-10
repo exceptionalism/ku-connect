@@ -6,51 +6,9 @@ var mailer = {
     },
     resetPassword: (pack, callback) => {
         send(pack, `KU Connect : Password Reset`, createMessage, callback)
-        // var transporter = nodemailer.createTransport({
-        //     host: 'smtp.office365.com',
-        //     port: 587,
-        //     secure: false, // true for 465, false for other ports
-        //     auth: {
-        //         user: 'kuconnection@outlook.com',
-        //         pass: process.env.MAIL_PASS || "Connection2020"
-        //     },
-        //     tls:{
-        //       rejectUnauthorized: false
-        //     }
-        // });
-        // var mailOptions = {
-        //     from: 'kuconnection@outlook.com',
-        //     to: pack.email,
-        //     subject: `KU Connect : Password Reset`,
-        //     html: createMessage(pack)
-        // };
-        // transporter.sendMail(mailOptions, function(error, info){
-        //     callback(error)
-        // })
     },
     accountRegistered: (pack, callback) => {        
         send(pack, `KU Connect : Account created successfully`, registeredMessage, callback)
-        // var transporter = nodemailer.createTransport({
-        //     host: 'smtp.office365.com',
-        //     port: 587,
-        //     secure: false, // true for 465, false for other ports
-        //     auth: {
-        //         user: 'kuconnection@outlook.com',
-        //         pass: process.env.MAIL_PASS || "Connection2020"
-        //     },
-        //     tls:{
-        //       rejectUnauthorized: false
-        //     }
-        // });
-        // var mailOptions = {
-        //     from: 'kuconnection@outlook.com',
-        //     to: pack.email,
-        //     subject: `KU Connect : Account created successfully`,
-        //     html: registeredMessage(pack)
-        // };
-        // transporter.sendMail(mailOptions, function(error, info){
-        //     callback(error)
-        // })
     }
 };
 const send = (pack, subject, message, callback) => {
