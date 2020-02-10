@@ -56,7 +56,7 @@ router.post('/create', checkForRegister, async (req, res) => {
 
                 mailer.accountRegistered({email, name, code, pass}, (error, info) => {
                     console.log(error, info)
-                    mailer.send({email, name, emailPin}, (error, info) => {
+                    mailer.confirmEmail({email, name, emailPin}, (error, info) => {
                         console.log(error, info)
                     })
                 })
