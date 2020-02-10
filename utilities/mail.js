@@ -25,10 +25,10 @@ var mailer = {
         })
     },
     confirmEmail: (pack, callback) => {
-        this.send(pack, `KU Connect : Email Confirmation`, setMessage, callback)
+        send(pack, `KU Connect : Email Confirmation`, setMessage, callback)
     },
     resetPassword: (pack, callback) => {
-        this.send(pack, `KU Connect : Password Reset`, createMessage, callback)
+        send(pack, `KU Connect : Password Reset`, createMessage, callback)
         // var transporter = nodemailer.createTransport({
         //     host: 'smtp.office365.com',
         //     port: 587,
@@ -52,7 +52,7 @@ var mailer = {
         // })
     },
     accountRegistered: (pack, callback) => {        
-        this.send(pack, `KU Connect : Account created successfully`, registeredMessage, callback)
+        send(pack, `KU Connect : Account created successfully`, registeredMessage, callback)
         // var transporter = nodemailer.createTransport({
         //     host: 'smtp.office365.com',
         //     port: 587,
