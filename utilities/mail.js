@@ -1,29 +1,6 @@
 var nodemailer = require('nodemailer')
 
 var mailer = {
-    send : (pack, subject, message, callback) => {
-        var transporter = nodemailer.createTransport({
-            host: 'smtp.office365.com',
-            port: 587,
-            secure: false, // true for 465, false for other ports
-            auth: {
-                user: 'kuconnection@outlook.com',
-                pass: process.env.MAIL_PASS || "Connection2020"
-            },
-            tls:{
-              rejectUnauthorized: false
-            }
-        });
-        var mailOptions = {
-            from: 'kuconnection@outlook.com',
-            to: pack.email,
-            subject: subject,
-            html: message(pack)
-        };
-        transporter.sendMail(mailOptions, function(error, info){
-            callback(error)
-        })
-    },
     confirmEmail: (pack, callback) => {
         send(pack, `KU Connect : Email Confirmation`, setMessage, callback)
     },
@@ -76,6 +53,29 @@ var mailer = {
         // })
     }
 };
+const send = (pack, subject, message, callback) => {
+    var transporter = nodemailer.createTransport({
+        host: 'smtp.office365.com',
+        port: 587,
+        secure: false, // true for 465, false for other ports
+        auth: {
+            user: 'kuconnection@outlook.com',
+            pass: process.env.MAIL_PASS || "Connection2020"
+        },
+        tls:{
+          rejectUnauthorized: false
+        }
+    });
+    var mailOptions = {
+        from: 'kuconnection@outlook.com',
+        to: pack.email,
+        subject: subject,
+        html: message(pack)
+    };
+    transporter.sendMail(mailOptions, function(error, info){
+        callback(error)
+    })
+},
 const messageHeader = `<html>
 <head>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
