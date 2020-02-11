@@ -28,5 +28,229 @@ MongoDB connected.
 ```
 The server is now live at [http://localhost:3000](http://localhost:3000)
 
+***
+
+The api can be accessed at `/api`
+Currently, there are two sets of endpoints. `/users` & `/data`
+
+### `/users`
+
+#### GET
+
+* ##### `/create`
+    * Required package
+                
+                {
+                    "name" : String,
+                    "email" : String,
+                    "code" : String
+                }
+
+    * Responses
+        * Success
+
+                {
+                    "user" : Object,
+                    "pass" : Number
+                }
+        * Failed
+
+                {
+                    "Error": String
+                }
+
+* #### `/signin`
+    * Required package
+                
+                {
+                    "code" : String,
+                    "pass" : String
+                }
+
+    * Responses
+        * Success
+
+                {
+                    "success" : "Authorized",
+                    "token" : Object
+                }
+        * Failed
+
+                {
+                    "Error": String
+                }
+
+* #### `/signout`
+    * Required package
+                
+                {
+                    "token" : Object
+                }
+
+    * Responses
+        * Success
+
+                {
+                    "success" : "signed out"
+                }
+        * Failed
+
+                {
+                    "Error": String
+                }
+
+#### POST
+
+* #### `/confirm-email`
+    * Required package
+                
+                {
+                    "token" : Object,
+                    "emailPin" : Number
+                }
+
+    * Responses
+        * Success
+
+                {
+                    "Error" : null
+                }
+        * Failed
+
+                {
+                    "Error": String
+                }
+
+* #### `/resend-confirmation-email`
+    * Required package
+                
+                {
+                    "token" : Object,
+                    "name" : String,
+                    "email" : String,
+                    "emailPin" : Number
+                }
+
+    * Responses
+        * Success
+
+                {
+                    "Error" : null
+                }
+        * Failed
+
+                {
+                    "Error": String
+                }
+
+* #### `/get-settings`
+    * Required package
+                
+                {
+                    "token" : Object
+                }
+
+    * Responses
+        * Success
+
+                {
+                    "Error" : null,
+                    "data" : {
+                        "notification" : Boolean,
+                        "timer" : Number
+                    }
+                }
+        * Failed
+
+                {
+                    "Error": String
+                }
+#### PATCH
+
+* #### `/email`
+    * Required package
+                
+                {
+                    "token" : Object,
+                    "email" : String
+                }
+
+    * Responses
+        * Success
+
+                {
+                    "Error" : null
+                }
+        * Failed
+
+                {
+                    "Error": String
+                }
+
+* #### `/reset-password`
+    * Required package
+                
+                {
+                    "token" : Object
+                }
+
+    * Responses
+        * Success
+
+                {
+                    "Error" : null
+                }
+        * Failed
+
+                {
+                    "Error": String
+                }
+
+* #### `/sync-settings`
+    * Required package
+                
+                {
+                    "token" : Object,
+                    "notification" : Boolean,
+                    "timer" : Number
+                }
+
+    * Responses
+        * Success
+
+                {
+                    "Error" : null
+                }
+        * Failed
+
+                {
+                    "Error": String
+                }
+
+
+
+### `/data`
+
+#### POST
+
+  * ##### `/get`
+      * Required package
+                  
+                  {
+                      "token" : Object
+                  }
+
+      * Responses
+          * Success
+
+                  {
+                      "docs" : Object
+                  }
+          * Failed
+
+                  {
+                      "Error": String
+                  }
+
 ## License
-[MIT](https://choosealicense.com/licenses/mit/)
+[MIT](https://github.com/exceptionalism/ku-connect/blob/master/LICENSE)
