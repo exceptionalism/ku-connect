@@ -133,9 +133,9 @@ router.post('/confirm-email', checkLoggedIn, async (req, res) => {
         user = new User(user)
         try {
             await user.save()
-            res.status(200).json({error: null})
+            res.status(200).json({Error: null})
         } catch (err) {
-            res.json({error: err.message})
+            res.json({Error: err.message})
         }
     }
 })
