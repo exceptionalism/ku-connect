@@ -143,28 +143,6 @@ Currently, there are two sets of endpoints. `/users` & `/data`
                     "Error": String
                 }
 
-* #### `/get-settings`
-    * Required package
-                
-                {
-                    "token" : Object
-                }
-
-    * Responses
-        * Success
-
-                {
-                    "Error" : null,
-                    "data" : {
-                        "notification" : Boolean,
-                        "timer" : Number
-                    }
-                }
-        * Failed
-
-                {
-                    "Error": String
-                }
 #### PATCH
 
 * #### `/email`
@@ -206,29 +184,6 @@ Currently, there are two sets of endpoints. `/users` & `/data`
                     "Error": String
                 }
 
-* #### `/sync-settings`
-    * Required package
-                
-                {
-                    "token" : Object,
-                    "notification" : Boolean,
-                    "timer" : Number
-                }
-
-    * Responses
-        * Success
-
-                {
-                    "Error" : null
-                }
-        * Failed
-
-                {
-                    "Error": String
-                }
-
-
-
 ### `/data`
 
 #### POST
@@ -251,6 +206,53 @@ Currently, there are two sets of endpoints. `/users` & `/data`
                   {
                       "Error": String
                   }
+
+* #### `/get-settings`
+    * Required package
+                
+                {
+                    "token" : Object
+                }
+
+    * Responses
+        * Success
+
+                {
+                    "Error" : null,
+                    "data" : {
+                        "notification" : Boolean,
+                        "timer" : Number
+                    }
+                }
+        * Failed
+
+                {
+                    "Error": String
+                }
+      
+#### PATCH
+
+* #### `/sync-settings`
+    * Required package
+                
+                {
+                    "token" : Object,
+                    "notification" : Boolean,
+                    "timer" : Number
+                }
+
+    * Responses
+        * Success
+
+                {
+                    "Error" : null
+                }
+        * Failed
+
+                {
+                    "Error": String
+                }
+
 
 ## License
 [MIT](https://github.com/exceptionalism/ku-connect/blob/master/LICENSE)
