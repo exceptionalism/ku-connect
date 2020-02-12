@@ -39,7 +39,7 @@ Currently, there are two sets of endpoints. `/users` & `/data`
 
 * ##### `/create`
     * Required package                
-        ```json
+        ```js
         {
             "name" : String,
             "email" : String,
@@ -49,14 +49,14 @@ Currently, there are two sets of endpoints. `/users` & `/data`
 
     * Responses
         * Success             
-            ```json
+            ```js
             {
                 "user" : Object,
                 "pass" : Number
             }
             ```
         * Fail
-            ```json
+            ```js
             {
                 "Error": String
             }
@@ -64,7 +64,7 @@ Currently, there are two sets of endpoints. `/users` & `/data`
 
 * #### `/signin`
     * Required package   
-        ```json
+        ```js
         {
             "code" : String,
             "pass" : String
@@ -73,14 +73,14 @@ Currently, there are two sets of endpoints. `/users` & `/data`
 
     * Responses
         * Success
-            ```json
+            ```js
             {
                 "success" : "Authorized",
                 "token" : Object
             }
             ```
         * Fail
-            ```json
+            ```js
             {
                 "Error": String
             }
@@ -88,7 +88,7 @@ Currently, there are two sets of endpoints. `/users` & `/data`
 
 * #### `/signout`
     * Required package
-      ```json
+      ```js
         {
             "token" : Object
         }
@@ -96,13 +96,13 @@ Currently, there are two sets of endpoints. `/users` & `/data`
 
     * Responses
         * Success 
-          ```json
+          ```js
           {
               "success" : "signed out"
           }
           ```
         * Fail
-          ```json
+          ```js
           {
               "Error": String
           }
@@ -112,7 +112,7 @@ Currently, there are two sets of endpoints. `/users` & `/data`
 
 * #### `/confirm-email`
     * Required package         
-        ```json
+        ```js
         {
             "token" : Object,
             "emailPin" : Number
@@ -121,13 +121,13 @@ Currently, there are two sets of endpoints. `/users` & `/data`
 
     * Responses
         * Success       
-            ```json
+            ```js
             {
                 "Error" : null
             }
             ```
         * Fail 
-            ```json
+            ```js
             {
                 "Error": String
             }
@@ -135,7 +135,7 @@ Currently, there are two sets of endpoints. `/users` & `/data`
 
 * #### `/resend-confirmation-email`
     * Required package
-        ```json
+        ```js
         {
             "token" : Object,
             "name" : String,
@@ -146,13 +146,13 @@ Currently, there are two sets of endpoints. `/users` & `/data`
 
     * Responses
         * Success
-            ```json
+            ```js
             {
                 "Error" : null
             }
             ```
         * Fail
-            ```json
+            ```js
             {
                 "Error": String
             }
@@ -162,7 +162,7 @@ Currently, there are two sets of endpoints. `/users` & `/data`
 
 * #### `/email`
     * Required package
-        ```json
+        ```js
         {
             "token" : Object,
             "email" : String
@@ -171,13 +171,13 @@ Currently, there are two sets of endpoints. `/users` & `/data`
 
     * Responses
         * Success
-            ```json
+            ```js
             {
                 "Error" : null
             }
             ```
         * Fail
-            ```json
+            ```js
             {
                 "Error": String
             }
@@ -185,7 +185,7 @@ Currently, there are two sets of endpoints. `/users` & `/data`
 
 * #### `/reset-password`
     * Required package
-        ```json
+        ```js
         {
             "token" : Object
         }
@@ -193,13 +193,13 @@ Currently, there are two sets of endpoints. `/users` & `/data`
 
     * Responses
         * Success
-            ```json
+            ```js
             {
                 "Error" : null
             }
             ```
         * Fail
-            ```json
+            ```js
             {
                 "Error": String
             }
@@ -211,7 +211,7 @@ Currently, there are two sets of endpoints. `/users` & `/data`
 
 * #### `/get`
     * Required package
-        ```json
+        ```js
         {
             "token" : Object
         }
@@ -219,13 +219,13 @@ Currently, there are two sets of endpoints. `/users` & `/data`
 
     * Responses
         * Success
-            ```json
+            ```js
             {
                 "docs" : Object
             }
             ```
         * Fail
-            ```json
+            ```js
             {
                 "Error": String
             }
@@ -233,7 +233,7 @@ Currently, there are two sets of endpoints. `/users` & `/data`
 
 * #### `/get-settings`
     * Required package
-        ```json
+        ```js
         {
             "token" : Object
         }
@@ -241,7 +241,7 @@ Currently, there are two sets of endpoints. `/users` & `/data`
 
     * Responses
         * Success
-            ```json
+            ```js
             {
                 "Error" : null,
                 "data" : {
@@ -251,7 +251,7 @@ Currently, there are two sets of endpoints. `/users` & `/data`
             }
             ```
         * Fail
-            ```json
+            ```js
             {
                 "Error": String
             }
@@ -261,7 +261,7 @@ Currently, there are two sets of endpoints. `/users` & `/data`
 
 * #### `/sync-settings`
     * Required package
-        ```json
+        ```js
         {
             "token" : Object,
             "notification" : Boolean,
@@ -271,13 +271,13 @@ Currently, there are two sets of endpoints. `/users` & `/data`
 
     * Responses
         * Success
-            ```json
+            ```js
             {
                 "Error" : null
             }
             ```
         * Fail
-            ```json
+            ```js
             {
                 "Error": String
             }
