@@ -22,11 +22,11 @@ $ node api
 ```
 
 You should get the following prompts.
-```terminal
-Server running at  3000
-MongoDB connected.
+```bash
+> Server running at 3000
+> MongoDB connected.
 ```
-The server is now live at [http://localhost:3000](http://localhost:3000)
+The server is now live at <http://localhost:3000>
 
 ***
 
@@ -38,221 +38,249 @@ Currently, there are two sets of endpoints. `/users` & `/data`
 #### GET
 
 * ##### `/create`
-    * Required package
-                
-                {
-                    "name" : String,
-                    "email" : String,
-                    "code" : String
-                }
+    * Required package                
+        ```json
+        {
+            "name" : String,
+            "email" : String,
+            "code" : String
+        }
+        ```
 
     * Responses
-        * Success
-
-                {
-                    "user" : Object,
-                    "pass" : Number
-                }
+        * Success             
+            ```json
+            {
+                "user" : Object,
+                "pass" : Number
+            }
+            ```
         * Fail
-
-                {
-                    "Error": String
-                }
+            ```json
+            {
+                "Error": String
+            }
+            ```
 
 * #### `/signin`
-    * Required package
-                
-                {
-                    "code" : String,
-                    "pass" : String
-                }
+    * Required package   
+        ```json
+        {
+            "code" : String,
+            "pass" : String
+        }
+        ```
 
     * Responses
         * Success
-
-                {
-                    "success" : "Authorized",
-                    "token" : Object
-                }
+            ```json
+            {
+                "success" : "Authorized",
+                "token" : Object
+            }
+            ```
         * Fail
-
-                {
-                    "Error": String
-                }
+            ```json
+            {
+                "Error": String
+            }
+            ```
 
 * #### `/signout`
     * Required package
-                
-                {
-                    "token" : Object
-                }
+      ```json
+        {
+            "token" : Object
+        }
+        ```
 
     * Responses
-        * Success
-
-                {
-                    "success" : "signed out"
-                }
+        * Success 
+          ```json
+          {
+              "success" : "signed out"
+          }
+          ```
         * Fail
-
-                {
-                    "Error": String
-                }
+          ```json
+          {
+              "Error": String
+          }
+          ```
 
 #### POST
 
 * #### `/confirm-email`
-    * Required package
-                
-                {
-                    "token" : Object,
-                    "emailPin" : Number
-                }
+    * Required package         
+        ```json
+        {
+            "token" : Object,
+            "emailPin" : Number
+        }
+        ```
 
     * Responses
-        * Success
-
-                {
-                    "Error" : null
-                }
-        * Fail
-
-                {
-                    "Error": String
-                }
+        * Success       
+            ```json
+            {
+                "Error" : null
+            }
+            ```
+        * Fail 
+            ```json
+            {
+                "Error": String
+            }
+            ```
 
 * #### `/resend-confirmation-email`
     * Required package
-                
-                {
-                    "token" : Object,
-                    "name" : String,
-                    "email" : String,
-                    "emailPin" : Number
-                }
+        ```json
+        {
+            "token" : Object,
+            "name" : String,
+            "email" : String,
+            "emailPin" : Number
+        }
+        ```
 
     * Responses
         * Success
-
-                {
-                    "Error" : null
-                }
+            ```json
+            {
+                "Error" : null
+            }
+            ```
         * Fail
-
-                {
-                    "Error": String
-                }
+            ```json
+            {
+                "Error": String
+            }
+            ```
 
 #### PATCH
 
 * #### `/email`
     * Required package
-                
-                {
-                    "token" : Object,
-                    "email" : String
-                }
+        ```json
+        {
+            "token" : Object,
+            "email" : String
+        }
+        ```
 
     * Responses
         * Success
-
-                {
-                    "Error" : null
-                }
+            ```json
+            {
+                "Error" : null
+            }
+            ```
         * Fail
-
-                {
-                    "Error": String
-                }
+            ```json
+            {
+                "Error": String
+            }
+            ```
 
 * #### `/reset-password`
     * Required package
-                
-                {
-                    "token" : Object
-                }
+        ```json
+        {
+            "token" : Object
+        }
+        ```
 
     * Responses
         * Success
-
-                {
-                    "Error" : null
-                }
+            ```json
+            {
+                "Error" : null
+            }
+            ```
         * Fail
-
-                {
-                    "Error": String
-                }
+            ```json
+            {
+                "Error": String
+            }
+            ```
 
 ### `/data`
 
 #### POST
 
-  * ##### `/get`
-      * Required package
-                  
-                  {
-                      "token" : Object
-                  }
-
-      * Responses
-          * Success
-
-                  {
-                      "docs" : Object
-                  }
-          * Fail
-
-                  {
-                      "Error": String
-                  }
-
-* #### `/get-settings`
+* #### `/get`
     * Required package
-                
-                {
-                    "token" : Object
-                }
+        ```json
+        {
+            "token" : Object
+        }
+        ```
 
     * Responses
         * Success
-
-                {
-                    "Error" : null,
-                    "data" : {
-                        "notification" : Boolean,
-                        "timer" : Number
-                    }
-                }
+            ```json
+            {
+                "docs" : Object
+            }
+            ```
         * Fail
+            ```json
+            {
+                "Error": String
+            }
+            ```
 
-                {
-                    "Error": String
+* #### `/get-settings`
+    * Required package
+        ```json
+        {
+            "token" : Object
+        }
+        ```
+
+    * Responses
+        * Success
+            ```json
+            {
+                "Error" : null,
+                "data" : {
+                    "notification" : Boolean,
+                    "timer" : Number
                 }
+            }
+            ```
+        * Fail
+            ```json
+            {
+                "Error": String
+            }
+            ```
       
 #### PATCH
 
 * #### `/sync-settings`
     * Required package
-                
-                {
-                    "token" : Object,
-                    "notification" : Boolean,
-                    "timer" : Number
-                }
+        ```json
+        {
+            "token" : Object,
+            "notification" : Boolean,
+            "timer" : Number
+        }
+        ```
 
     * Responses
         * Success
-
-                {
-                    "Error" : null
-                }
+            ```json
+            {
+                "Error" : null
+            }
+            ```
         * Fail
-
-                {
-                    "Error": String
-                }
-
-
+            ```json
+            {
+                "Error": String
+            }
+            ```
 ## License
 [MIT](https://github.com/exceptionalism/ku-connect/blob/master/LICENSE)
