@@ -53,7 +53,7 @@ Currently, there are two sets of endpoints. `/users` & `/data`
                     "user" : Object,
                     "pass" : Number
                 }
-        * Failed
+        * Fail
 
                 {
                     "Error": String
@@ -74,7 +74,7 @@ Currently, there are two sets of endpoints. `/users` & `/data`
                     "success" : "Authorized",
                     "token" : Object
                 }
-        * Failed
+        * Fail
 
                 {
                     "Error": String
@@ -93,7 +93,7 @@ Currently, there are two sets of endpoints. `/users` & `/data`
                 {
                     "success" : "signed out"
                 }
-        * Failed
+        * Fail
 
                 {
                     "Error": String
@@ -115,7 +115,7 @@ Currently, there are two sets of endpoints. `/users` & `/data`
                 {
                     "Error" : null
                 }
-        * Failed
+        * Fail
 
                 {
                     "Error": String
@@ -137,7 +137,7 @@ Currently, there are two sets of endpoints. `/users` & `/data`
                 {
                     "Error" : null
                 }
-        * Failed
+        * Fail
 
                 {
                     "Error": String
@@ -159,7 +159,7 @@ Currently, there are two sets of endpoints. `/users` & `/data`
                 {
                     "Error" : null
                 }
-        * Failed
+        * Fail
 
                 {
                     "Error": String
@@ -178,7 +178,7 @@ Currently, there are two sets of endpoints. `/users` & `/data`
                 {
                     "Error" : null
                 }
-        * Failed
+        * Fail
 
                 {
                     "Error": String
@@ -201,7 +201,7 @@ Currently, there are two sets of endpoints. `/users` & `/data`
                   {
                       "docs" : Object
                   }
-          * Failed
+          * Fail
 
                   {
                       "Error": String
@@ -224,7 +224,7 @@ Currently, there are two sets of endpoints. `/users` & `/data`
                         "timer" : Number
                     }
                 }
-        * Failed
+        * Fail
 
                 {
                     "Error": String
@@ -247,7 +247,7 @@ Currently, there are two sets of endpoints. `/users` & `/data`
                 {
                     "Error" : null
                 }
-        * Failed
+        * Fail
 
                 {
                     "Error": String
