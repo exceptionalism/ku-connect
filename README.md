@@ -8,17 +8,17 @@ Make sure you have [NodeJs](https://nodejs.org) installed on your system.
 
 To install the necessary packages for the api, execute the following command in the terminal.
 ```bash
-npm install
+$ npm install
 ```
 
 Likewise, the following command will start the project in development mode.
 ```bash
-npm run dev
+$ npm run dev
 ```
 
 You can also directly start the development server with NodeJs
 ```bash
-node api
+$ node api
 ```
 
 You should get the following prompts.
