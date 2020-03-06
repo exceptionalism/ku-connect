@@ -1,5 +1,5 @@
 {
     "mongoUri": "mongodb+srv://kuconnect:Convincing2019@c1-hjrxz.gcp.mongodb.net/api?retryWrites=true&w=majority",
-    "baseUrl": "http://54.165.25.69/api",
+    "baseUrl": "http://34.227.26.246/api",
     "PORT": 80
 }

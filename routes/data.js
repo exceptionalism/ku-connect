@@ -22,8 +22,7 @@ router.post('/get', async (req, res) => {
                 let routineAll = Routine.find()
                 routineAll.exec((err, docs) => {
                     if (err) throw err;
-                    // console.log(docs)
-                    res.status(200).json({ docs })
+                    res.status(200).json( docs )
                 })
             } else {
                 res.status(501).json({
