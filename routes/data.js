@@ -22,7 +22,16 @@ router.post('/get', async (req, res) => {
                 let routineAll = Routine.find()
                 routineAll.exec((err, docs) => {
                     if (err) throw err;
-                    res.status(200).json( docs )
+                    let dataDoc = []
+                    let time = ""
+                    for (let i = 0; i < docs.length; i++) {
+                        time = docs[i]["time"].toString()
+                        endTime = (docs[i]["time"] + (docs[i]["duration"]*100 || 200)).toString()
+                        time = time.substr(0, time.length - 2) + ":" + time.substr(time.length - 2, time.length)
+                        endTime = endTime.substr(0, endTime.length - 2) + ":" + endTime.substr(endTime.length - 2, endTime.length)
+                        dataDoc.push({...docs[i]._doc, startTime: time, endTime})
+                    }
+                    res.status(200).json( dataDoc )
                 })
             } else {
                 res.status(501).json({

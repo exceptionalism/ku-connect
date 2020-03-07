@@ -7,7 +7,8 @@ const urlSchema = new mongoose.Schema({
     sCode: String,
     lecturer: String,
     classroom: String,
-    facSem: String
+    facSem: String,
+    duration: Number
 })
  
 module.exports = mongoose.model('routines', urlSchema)
