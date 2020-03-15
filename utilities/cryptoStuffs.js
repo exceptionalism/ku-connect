@@ -1,7 +1,11 @@
-const md5 = require('md5')
+const crypto = require('crypto')
 
-const hash = code => md5(code);
-const generateToken = pass => md5(md5(pass));
+const hash = code => {
+    console.log(`Code: ${code}`)
+    let has = crypto.pbkdf2Sync(code.toString(), 'secretSaltIng215%#', 1, 32, 'sha512')
+    return has.toString('hex')
+}
+const generateToken = pass => hash(hash(pass));
 const generatePin = () => Math.floor((Math.random() + 1)*1000);
 const getNewToken = (code, pass) => {
     return {

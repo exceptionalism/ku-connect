@@ -35,6 +35,7 @@ router.post('/create', checkForRegister, async (req, res) => {
                 }
                 
                 let password = hash(pass)
+                console.log(`hashed: ${password}`)
                 
                 let token = getNewToken(code, pass)
                 
